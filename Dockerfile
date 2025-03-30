@@ -18,6 +18,8 @@ RUN npm install -g pnpm && pnpm install
 # Copy the rest of your app's source code
 COPY . .
 
+RUN echo "After copying everything:" && ls -la
+
 # Expose the port the app runs on
 EXPOSE 5173
 
