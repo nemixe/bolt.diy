@@ -61,7 +61,7 @@ RUN pnpm run build
 
 RUN ls -la
 
-CMD [ "pnpm", "run", "dockerstart"]
+CMD [ "sh", "-c", "ls -la && pwd && pnpm run dockerstart" ]
 
 # Development image
 FROM base AS bolt-ai-development
