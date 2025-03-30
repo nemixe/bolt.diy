@@ -92,10 +92,18 @@ export default defineConfig((config) => {
     },
     build: {
       target: 'esnext',
+      rollupOptions: {
+        external: ['crypto', 'stream', 'path', 'fs', 'util', 'os', 'http', 'https', 'zlib', 'buffer', 'process'],
+      },
     },
     plugins: [
       nodePolyfills({
-        include: ['path', 'buffer', 'process'],
+        include: ['path', 'buffer', 'process', 'crypto', 'stream'],
+        globals: {
+          Buffer: true,
+          global: true,
+          process: true,
+        },
       }),
       config.mode !== 'test' && remixCloudflareDevProxy(),
       remixVitePlugin({
@@ -124,6 +132,10 @@ export default defineConfig((config) => {
           api: 'modern-compiler',
         },
       },
+    },
+    ssr: {
+      target: 'node',
+      noExternal: true,
     },
   };
 });

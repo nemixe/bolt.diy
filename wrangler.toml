@@ -4,3 +4,13 @@ compatibility_flags = ["nodejs_compat"]
 compatibility_date = "2024-07-01"
 pages_build_output_dir = "./build/client"
 send_metrics = false
+
+# Add these lines
+[build]
+command = "NODE_ENV=production pnpm run build"
+
+[build.environment]
+NODE_VERSION = "20.18.0"
+
+[nodejs_compat]
+enabled = true
