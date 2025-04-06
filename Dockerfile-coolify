@@ -4,15 +4,17 @@ WORKDIR /app
 
 # Instalar pnpm e wrangler
 RUN corepack enable pnpm && \
-    npm install -g wrangler corepack@latest
+    npm install -g wrangler
 
 # Copiar arquivos de dependências
 COPY package.json pnpm-lock.yaml ./
 
-# Instalar dependências
-RUN pnpm install
+RUN npm install -g corepack@latest
 
-# Copiar código  fonte e scripts
+RUN corepack enable pnpm && pnpm install
+#RUN npm install -g pnpm && pnpm install
+
+# Copiar código fonte e scripts
 COPY . .
 
 # Garantir que o bindings.sh tem permissões de execução e formato correto
